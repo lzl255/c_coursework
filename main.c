@@ -33,11 +33,6 @@ void print_tile(enum tile t) {
   }
 }
 
-void println_tile(enum tile t) {
-  print_tile(t);
-  printf("\n");
-}
-
 bool is_safe(enum tile tile) {
   switch (tile) {
   case L:
@@ -117,11 +112,6 @@ void print_direction(enum direction d) {
   }
 }
 
-void println_direction(enum direction d) {
-  print_direction(d);
-  printf("\n");
-}
-
 static int prev_rand;
 
 void init_random() { prev_rand = (int)time(NULL); }
@@ -138,11 +128,6 @@ struct coordinate {
 };
 
 void print_coordinate(struct coordinate c) { printf("(%d, %d)", c.x, c.y); }
-
-void println_coordinate(struct coordinate c) {
-  print_coordinate(c);
-  printf("\n");
-}
 
 #define MAP_SIDE_LENGTH 9
 
