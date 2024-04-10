@@ -78,7 +78,7 @@ enum direction num_to_direction(int num) {
   case 7:
     return DownRight;
   default:
-    printf("unreahcable");
+    printf("unreachable\n");
     exit(1);
   }
 }
