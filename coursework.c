@@ -27,7 +27,7 @@ void read_map(enum tile *map, FILE *in) {
       do {
         c = (char)fgetc(in);
       } while (c == '\n' || c == ' ');
-      map[y*9+x] = tile_from_char(c);
+      map[y * 9 + x] = tile_from_char(c);
     }
   }
   // for (int y = 0; y < 9; ++y) {
@@ -290,13 +290,11 @@ int main() {
       map_sd[y * MAP_SIDE_LENGTH + x] = sd_lengths(&stats, mean);
     }
   }
-  printf("Map:\n");
   for (int y = 0; y < 9; ++y) {
     for (int x = 0; x < 9; ++x) {
       print_tile(map[y * MAP_SIDE_LENGTH + x]);
-      printf(" ");
+      printf("%c", x < 8 ? ' ' : '\n');
     }
-    printf("\n");
   }
   printf("\n");
   printf("Probability of escape:\n");
@@ -308,25 +306,22 @@ int main() {
         printf("  ");
       else if (probability < 100.0)
         printf(" ");
-      printf("%.02lf ", probability);
+      printf("%.02lf%c", probability, x < 8 ? ' ' : '\n');
     }
-    printf("\n");
   }
   printf("\n");
   printf("Mean path length:\n");
   for (int y = 0; y < 9; ++y) {
     for (int x = 0; x < 9; ++x) {
-      printf("%.02lf ", map_mean[y * MAP_SIDE_LENGTH + x]);
+      printf("%.02lf%c", map_mean[y * MAP_SIDE_LENGTH + x], x < 8 ? ' ' : '\n');
     }
-    printf("\n");
   }
   printf("\n");
   printf("Standard deviation of path length:\n");
   for (int y = 0; y < 9; ++y) {
     for (int x = 0; x < 9; ++x) {
-      printf("%.02lf ", map_sd[y * MAP_SIDE_LENGTH + x]);
+      printf("%.02lf%c", map_sd[y * MAP_SIDE_LENGTH + x], x < 8 ? ' ' : '\n');
     }
-    printf("\n");
   }
   return 0;
 }
