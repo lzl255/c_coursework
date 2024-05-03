@@ -238,23 +238,27 @@ struct stats {
 };
 
 double mean_length(struct stats *stats) {
+  if (stats->escape_count == 0)
+    return 0;
   double sum = 0;
   for (int i = 0; i < 1000; i++) {
     sum += (double)stats->lengths[i];
   }
-  if (stats->escape_count == 0)
-    return 0;
-  else
-    return sum / (double)stats->escape_count;
+  return sum / (double)stats->escape_count;
 }
 
 double sd_lengths(struct stats *stats, double mean) {
+  if (stats->escape_count == 0)
+    return 0;
   double sum = 0;
   for (int i = 0; i < 1000; i++) {
-    double diff = (double)stats->lengths[i] - mean;
-    sum += diff * diff;
+    double length = (double)stats->lengths[i];
+    if (length != 0) {
+      double diff = length - mean;
+      sum += diff * diff;
+    }
   }
-  return sqrt(sum / 1000.0);
+  return sqrt(sum / (double)stats->escape_count);
 }
 
 double escape_probability(struct stats *stats) {
