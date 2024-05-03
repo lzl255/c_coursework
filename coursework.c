@@ -242,7 +242,10 @@ double mean_length(struct stats *stats) {
   for (int i = 0; i < 1000; i++) {
     sum += (double)stats->lengths[i];
   }
-  return sum / 1000.0;
+  if (stats->escape_count == 0)
+    return 0;
+  else
+    return sum / (double)stats->escape_count;
 }
 
 double sd_lengths(struct stats *stats, double mean) {
@@ -263,9 +266,9 @@ struct stats perform_1000_walks(struct coordinate coord, enum tile map[]) {
   struct stats stats = {0};
   for (int i = 0; i < 1000; ++i) {
     struct walk_result walk_result = perform_walk(coord, map);
-    stats.lengths[i] = walk_result.length;
     if (walk_result.success) {
       stats.escape_count += 1;
+      stats.lengths[i] = walk_result.length;
     }
   }
   return stats;
