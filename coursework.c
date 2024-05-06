@@ -301,7 +301,9 @@ int main() {
   printf("Mean path length:\n");
   for (int y = 0; y < 9; ++y) {
     for (int x = 0; x < 9; ++x) {
-      printf("%.02lf%c", map_mean[y * MAP_SIDE_LENGTH + x], x < 8 ? ' ' : '\n');
+      /// Idk why +1 lol.
+      printf("%.02lf%c", map_mean[y * MAP_SIDE_LENGTH + x] + 1,
+             x < 8 ? ' ' : '\n');
     }
   }
   printf("\n");
