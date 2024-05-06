@@ -302,8 +302,10 @@ int main() {
   for (int y = 0; y < 9; ++y) {
     for (int x = 0; x < 9; ++x) {
       /// Idk why +1 lol.
-      printf("%.02lf%c", map_mean[y * MAP_SIDE_LENGTH + x] + 1,
-             x < 8 ? ' ' : '\n');
+      double mean = map_mean[y * MAP_SIDE_LENGTH + x];
+      if (mean != 0)
+        mean += 1;
+      printf("%.02lf%c", mean, x < 8 ? ' ' : '\n');
     }
   }
   printf("\n");
