@@ -58,37 +58,18 @@ bool is_safe(enum tile tile) {
 
 enum direction {
   Up,
-  Down,
-  Left,
-  Right,
-  UpLeft,
   UpRight,
-  DownLeft,
+  Right,
   DownRight,
+  Down,
+  DownLeft,
+  Left,
+  UpLeft,
 };
 
 enum direction num_to_direction(int num) {
-  switch (num % 8) {
-  case 0:
-    return Up;
-  case 1:
-    return Down;
-  case 2:
-    return Left;
-  case 3:
-    return Right;
-  case 4:
-    return UpLeft;
-  case 5:
-    return UpRight;
-  case 6:
-    return DownLeft;
-  case 7:
-    return DownRight;
-  default:
-    printf("unreachable\n");
-    exit(1);
-  }
+  assert(num < 8);
+  return (enum direction)num;
 }
 
 void print_direction(enum direction d) {
@@ -122,7 +103,7 @@ void print_direction(enum direction d) {
 
 void init_random() { srand(123456); }
 
-enum direction random_direction() { return num_to_direction(rand()); }
+enum direction random_direction() { return num_to_direction(rand() % 8); }
 
 struct coordinate {
   int x; // horizontal (left to right)
